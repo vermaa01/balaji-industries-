@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shree Balaji Industries | Precision Automobile Parts Manufacturing</title>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root{ --primary-color:#0d47a1; --secondary-color:#1565c0; --accent-color:#ff5722; --dark-bg:#0a0a0a; --darker-bg:#000000; --light-text:#ffffff; --gray-text:#9aa7b0; --section-padding:80px 0; --container-width:1200px; }
+        body{ font-family:'Montserrat',sans-serif; background-color:var(--dark-bg); color:var(--light-text); line-height:1.6; overflow-x:hidden; }
+        .container{ max-width:var(--container-width); margin:0 auto; padding:0 20px; }
+
+        /* Header */
+        header{ position:fixed; top:0; width:100%; padding:20px 0; background-color:rgba(10,10,10,0.95); backdrop-filter:blur(10px); z-index:1000; transition:all .3s ease; border-bottom:1px solid rgba(255,255,255,.06); }
+        header.scrolled{ padding:15px 0; box-shadow:0 5px 20px rgba(0,0,0,.3); }
+        .header-container{ display:flex; justify-content:space-between; align-items:center; }
+        .logo{ font-size:28px; font-weight:800; color:var(--primary-color); letter-spacing:1px; display:flex; align-items:center; text-transform:uppercase; }
+        .logo i{ margin-right:12px; font-size:32px; background:linear-gradient(135deg,var(--primary-color),var(--secondary-color)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+        nav{ flex-grow:1; display:flex; justify-content:center; }
+        nav ul{ display:flex; list-style:none; align-items:center; }
+        nav ul li{ margin-left:30px; }
+        nav ul li a{ color:var(--light-text); text-decoration:none; font-weight:600; font-size:14px; text-transform:uppercase; letter-spacing:1px; padding:8px 0; position:relative; }
+        nav ul li a:hover{ color:var(--primary-color); }
+        nav ul li a::after{ content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:var(--primary-color); transition:width .25s ease; }
+        nav ul li a:hover::after{ width:100%; }
+
+        .mobile-menu{ display:none; cursor:pointer; }
+        .mobile-menu span{ display:block; width:25px; height:3px; background-color:var(--light-text); margin:5px 0; transition:all .25s ease; }
+
+        /* Hero (background video / image + overlay) */
+        .hero{ min-height:80vh; display:flex; align-items:center; padding:var(--section-padding); position:relative; overflow:hidden; }
+        .hero-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:brightness(.45) saturate(.95); }
+        .hero-overlay{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.7) 100%); z-index:1; }
+        .hero-container{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; z-index:2; }
+        h1{ font-size:48px; font-weight:800; line-height:1.1; margin-bottom:12px; color:var(--light-text); text-shadow:0 2px 8px rgba(0,0,0,.6); }
+        .hero-subtitle{ font-size:20px; font-weight:300; color:var(--gray-text); margin-bottom:18px; }
+
+        /* Section header */
+        section{ padding:var(--section-padding); }
+        .section-header{ text-align:center; margin-bottom:60px; }
+        .section-subtitle{ display:inline-block; color:var(--primary-color); font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; position:relative; }
+        .section-subtitle::after{ content:''; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); width:40px; height:2px; background-color:var(--primary-color); }
+        h2{ font-size:56px; font-weight:800; margin-bottom:12px; color:var(--light-text); }
+        .section-description{ font-size:16px; color:var(--gray-text); max-width:760px; margin:0 auto; }
+
+        /* About (target area) */
+        .about{ background-color:var(--darker-bg); }
+        .about-container{ display:grid; grid-template-columns:1fr 520px; gap:60px; align-items:center; }
+        .about-content h3{ font-size:18px; font-weight:700; margin-bottom:16px; color:var(--light-text); }
+        .about-content p{ font-size:15px; line-height:1.8; color:var(--gray-text); margin-bottom:16px; }
+        .about-features{ margin-top:28px; }
+        .feature-item{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+        .feature-icon{ background-color:var(--primary-color); color:#fff; width:48px; height:48px; border-radius:50%; display:flex; justify-content:center; align-items:center; flex-shrink:0; box-shadow:0 6px 18px rgba(13,71,161,.18); }
+        .feature-text h4{ font-size:15px; font-weight:700; margin-bottom:6px; color:var(--light-text); }
+        .feature-text p{ font-size:14px; color:var(--gray-text); margin:0; }
+        .about-image{ display:flex; justify-content:center; align-items:center; height:420px; border-radius:14px; overflow:hidden; box-shadow:0 28px 60px rgba(0,0,0,.6); }
+        .about-image img{ width:100%; height:100%; object-fit:cover; border-radius:14px; display:block; }
+
+        /* Products styles (updated to match attached design) */
+        .products{ background-color:var(--darker-bg); }
+        .products-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:28px; align-items:start; }
+        .product-card{ background:transparent; border-radius:12px; overflow:hidden; transition:all .35s ease; border:1px solid rgba(255,255,255,0.03); box-shadow:0 12px 30px rgba(0,0,0,0.6); }
+        .product-card:hover{ transform:translateY(-10px); box-shadow:0 30px 70px rgba(0,0,0,0.75); border-color:rgba(13,71,161,0.25); }
+        .product-image{ height:220px; overflow:hidden; position:relative; }
+        .product-image img{ width:100%; height:100%; object-fit:cover; display:block; border-top-left-radius:12px; border-top-right-radius:12px; transition:transform .6s ease; }
+        .product-card:hover .product-image img{ transform:scale(1.04); }
+        .product-image::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:60%; background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.0)); pointer-events:none; }
+        .product-info{ background:rgba(5,5,5,0.6); padding:20px; border-bottom-left-radius:12px; border-bottom-right-radius:12px; }
+        .product-title{ font-size:18px; font-weight:800; margin-bottom:8px; color:var(--light-text); }
+        .product-description{ font-size:14px; color:var(--gray-text); margin:0; }
+        @media (prefers-reduced-motion: no-preference){ .product-card, .product-image img{ will-change: transform; } }
+
+        /* Contact section styles: left info + right dark form card */
+        .contact{ background-color:var(--darker-bg); }
+        .contact-container{ display:grid; grid-template-columns:1fr 520px; gap:60px; align-items:start; }
+        .contact-info h3{ font-size:22px; font-weight:700; margin-bottom:18px; color:var(--light-text); }
+        .contact-info p{ font-size:15px; line-height:1.8; color:var(--gray-text); margin-bottom:18px; }
+        .contact-details{ margin-top:18px; }
+        .contact-item{ display:flex; align-items:flex-start; margin-bottom:18px; gap:14px; }
+        .contact-item i{ background-color:var(--primary-color); color:#fff; width:44px; height:44px; border-radius:50%; display:flex; justify-content:center; align-items:center; box-shadow:0 6px 18px rgba(13,71,161,.12); }
+        .contact-text h4{ font-size:15px; font-weight:700; margin-bottom:6px; color:var(--light-text); }
+        .contact-text p{ margin:0; color:var(--gray-text); font-size:14px; }
+
+        .contact-form{ background:linear-gradient(180deg, rgba(5,5,5,0.55), rgba(3,3,3,0.6)); border-radius:12px; padding:28px; border:1px solid rgba(255,255,255,0.04); box-shadow:0 20px 50px rgba(0,0,0,0.6); }
+        .contact-form label{ display:block; font-size:13px; color:var(--gray-text); margin-bottom:8px; }
+        .contact-form input, .contact-form textarea{ width:100%; padding:12px 14px; border-radius:6px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); color:var(--light-text); font-size:14px; }
+        .contact-form input::placeholder, .contact-form textarea::placeholder{ color:rgba(154,167,176,0.45); }
+        .contact-form .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        .btn-submit{ background:var(--primary-color); color:#fff; padding:12px 18px; border-radius:6px; font-weight:700; letter-spacing:1px; border:none; cursor:pointer; display:block; width:100%; margin-top:12px; }
+        .btn-submit:hover{ background:var(--secondary-color); transform:translateY(-2px); }
+
+        /* keep other sections compact (omitted here to focus edits) */
+
+        /* Responsive */
+        @media (max-width:1100px){ .about-container{ grid-template-columns:1fr 420px; } h2{ font-size:44px; } }
+        @media (max-width:992px){ .hero-container, .about-container, .quality-container, .contact-container{ grid-template-columns:1fr; gap:40px; } h1{ font-size:38px; } .hero-image{ height:350px; } nav ul{ display:none; } .mobile-menu{ display:block; } }
+        @media (max-width:768px){ .section-header{ margin-bottom:40px; } h2{ font-size:34px; } .hero-buttons{ flex-direction:column; align-items:flex-start; } .btn{ width:100%; text-align:center; } .form-row{ grid-template-columns:1fr; } }
+        @media (max-width:576px){ .services-grid, .products-grid{ grid-template-columns:1fr; } }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="nav-pill">
+                <div class="logo">
+                    <img src="assets/logo-white.png" alt="Shree Balaji Industries logo" />
+                    <span class="visually-hidden">Shree Balaji Industries</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#quality">Quality</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-container hero-centered">
+                <div class="hero-content hero-content-center">
+                    <h1>Shree Balaji Industries</h1>
+                    <div class="hero-subtitle hero-subtitle-small">Precision Automobile Parts Manufacturing</div>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+                        <a href="#services" class="btn btn-secondary">Our Services</a>
+                    </div>
+                    <!-- hero animation removed -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">OUR STORY</div>
+                <h2>About Shree Balaji Industries</h2>
+                <p class="section-description">
+                    Precision manufacturer of high-quality automobile components.
+                </p>
+            </div>
+            <div class="about-container">
+                <div class="about-content">
+                    <h3>Excellence in Manufacturing</h3>
+                    <p>
+                        Shree Balaji Industries manufactures high-quality precision automobile components that meet automotive industry standards.
+                    </p>
+                    <p>
+                        Our facility is equipped with Traub lathes, CNC centers and precision grinding and milling equipment for reliable production.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Advanced Manufacturing</h4>
+                                <p>Cutting-edge technology and precision machinery</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Quality Assurance</h4>
+                                <p>Rigorous quality control at every stage</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Expert Team</h4>
+                                <p>Skilled engineers and industry experts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://picsum.photos/seed/factory/600/450.jpg" alt="Manufacturing Facility" width="600" height="450" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">OUR EXPERTISE</div>
+                <h2>Manufacturing Services</h2>
+                <p class="section-description">
+                    We offer precision machining services for the automotive industry.
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">CNC Machining</h3>
+                        <p class="service-description">
+                            Precision CNC machining for complex automobile components.
+                        </p>
+                        <ul class="service-features">
+                            <li>Multi-axis CNC</li>
+                            <li>High precision</li>
+                            <li>Complex geometries</li>
+                            <li>Short lead times</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('https://images.pexels.com/photos/32845701/pexels-photo-32845701.jpeg');">
+                        <div class="service-image-overlay">
+                            <h3 class="service-image-title">CNC Machining</h3>
+                            <p class="service-image-description">Advanced multi-axis CNC machines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Traub Machining</h3>
+                        <p class="service-description">
+                            Automatic lathe machining for high-volume production.
+                        </p>
+                        <ul class="service-features">
+                            <li>High-volume production</li>
+                            <li>Consistent quality</li>
+                            <li>Cost-effective</li>
+                            <li>Quick setup</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('https://5.imimg.com/data5/SELLER/Default/2023/8/335446689/MN/HZ/KC/44823875/traub-machine-job-work-500x500.jpg');">
+                        <div class="service-image-overlay">
+                            <h3 class="service-image-title">Traub Machining</h3>
+                            <p class="service-image-description">High-performance automatic lathes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-circle-notch"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">center Grinding</h3>
+                        <p class="service-description">
+                            Surface, cylindrical, and centerless grinding services.
+                        </p>
+                        <ul class="service-features">
+                            <li>Surface grinding</li>
+                            <li>Cylindrical grinding</li>
+                            <li>Centerless grinding</li>
+                            <li>Superior finish</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('https://www.dekmake.com/wp-content/uploads/Centerless-Grinder.png');">
+                        <div class="service-image-overlay">
+                            <h3 class="service-image-title">Precision Grinding</h3>
+                            <p class="service-image-description">Advanced grinding machines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Tapping & Threading</h3>
+                        <p class="service-description">
+                            Precision tapping and threading services.
+                        </p>
+                        <ul class="service-features">
+                            <li>Internal threading</li>
+                            <li>External threading</li>
+                            <li>Custom profiles</li>
+                            <li>High accuracy</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('https://www.3erp.com/wp-content/uploads/2024/10/1-min-4.jpg');">
+                        <div class="service-image-overlay">
+                            <h3 class="service-image-title">Tapping & Threading</h3>
+                            <p class="service-image-description">Precision tapping machines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Rolling Operations</h3>
+                        <p class="service-description">
+                            Thread rolling and form rolling processes.
+                        </p>
+                        <ul class="service-features">
+                            <li>Thread rolling</li>
+                            <li>Form rolling</li>
+                            <li>Increased strength</li>
+                            <li>Material efficiency</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('https://armpremfg.com/wp-content/uploads/2023/01/86f26528c5e2d08955f8e41c4b44864e.png');">
+                        <div class="service-image-overlay">
+                            <h3 class="service-image-title">Rolling Operations</h3>
+                            <p class="service-image-description">Thread rolling machines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Milling Services</h3>
+                        <p class="service-description">
+                            Precision milling for complex geometries.
+                        </p>
+                        <ul class="service-features">
+                            <li>Vertical milling</li>
+                            <li>Horizontal milling</li>
+                            <li>Complex profiles</li>
+                            <li>High precision</li>
+                        </ul>
+                    </div>
+                    <div class="service-image" style="background-image: url('https://www.cncmasters.com/wp-content/uploads/2022/10/universal-milling-machine.jpg');">
+                        <div class="service-image-overlay">
+                            <h3 class="service-image-title">Milling Services</h3>
+                            <p class="service-image-description">Advanced milling machines</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">OUR PRODUCTS</div>
+                <h2>Automobile Components</h2>
+                <p class="section-description">
+                    We manufacture high-quality precision components for the automotive industry.
+                </p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://keentechindustries.com/wp-content/uploads/2023/10/all-over-industrial-cnc-vmc-job-work-manufacturing-developing.jpg" alt="CNC WORKS" width="400" height="200" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">CNC WORKS</h3>
+                        <p class="product-description">
+                            Precision parts for better automotive performance.
+                        </p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://img2.exportersindia.com/product_images/bc-full/2022/2/9099596/img-201910-1645248483_6179201_1514940.jpg" alt="Shafts" width="400" height="200" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Traub WORKS</h3>
+                        <p class="product-description">
+                            High-speed precision turning for accurate and consistent components.
+                        </p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://content.jdmagicbox.com/v2/comp/mumbai/09/022p1210309/catalogue/micro-grinding-works-jogeshwari-west-mumbai-precision-turned-component-manufacturers-ng6q78kwpi.jpg" alt="Granding Works" width="400" height="200" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Granding WORKS</h3>
+                        <p class="product-description">
+                            Precision OD, ID, centerless, and surface grinding for accurate and high-quality finished components.
+                        </p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://www.market-prospects.com/storage/images/d6991177565046e2d558f77013ded85e.jpg" alt="Tapping & Threading" width="400" height="200" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tapping & Threading WORKS</h3>
+                        <p class="product-description">
+                            Accurate and uniform internal threading using precision tapping machines.
+                        </p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/17372998/pexels-photo-17372998.jpeg" alt="Rolling Works" width="400" height="200" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Rolling WORKS</h3>
+                        <p class="product-description">
+                            High-strength external thread and knurl rolling with accurate, clean, and durable results
+                        </p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://media.istockphoto.com/id/171148146/photo/cnc-fr-228-ser-in-progress.jpg?s=612x612&w=0&k=20&c=YH9LY4VWd5CrFqtSqT6Z2_b9VCv8biC7et7_TPzNHNg=" alt="Milling works " width="400" height="200" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Milling WORKS</h3>
+                        <p class="product-description">
+                            Precision milling for accurate surfaces, slots, profiles, and custom component shaping.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section class="quality" id="quality">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">OUR COMMITMENT</div>
+                <h2>Quality Assurance</h2>
+                <p class="section-description section-description-small">
+                    Rigorous testing and precision measurement ensure every component meets highest standards.
+                </p>
+            </div>
+            <div class="quality-container">
+                <div class="quality-content">
+                    <h3>Excellence in Every Component</h3>
+                    <p>
+                        We maintain the highest quality standards through comprehensive testing and advanced measurement techniques at every stage of production.
+                    </p>
+                </div>
+                <div class="quality-standards">
+                    <div class="standard-item">
+                        <div class="standard-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <div class="standard-name">CMM Measurement</div>
+                        <div class="standard-description">Coordinate Measurement Machine</div>
+                    </div>
+                    <div class="standard-item">
+                        <div class="standard-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div class="standard-name">Vernier Caliper</div>
+                        <div class="standard-description">Precision Dimension Measurement</div>
+                    </div>
+                    <div class="standard-item">
+                        <div class="standard-icon">
+                            <i class="fas fa-gauge"></i>
+                        </div>
+                        <div class="standard-name">Micrometer</div>
+                        <div class="standard-description">Ultra-Precise Thickness Check</div>
+                    </div>
+                    <div class="standard-item">
+                        <div class="standard-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="standard-name">Spirit Level</div>
+                        <div class="standard-description">Alignment & Flatness Verification</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">GET IN TOUCH</div>
+                <h2>Contact Us</h2>
+                <p class="section-description">
+                    Reach out for inquiries, quotes, or to discuss your requirements.
+                </p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>We're Here to Help</h3>
+                    <p>
+                        Our team is ready to assist with your manufacturing needs. 
+                        Whether you have questions, need a quote, or want to discuss a project, we're here to help.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-text">
+                                <h4>Our Location</h4>
+                                <p>Shree Balaji Industries<br> Parwati complex,Industrial Area chikhali<br>Pune, Maharashtra - 411062<br>India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="contact-text">
+                                <h4>Phone Numbers</h4>
+                                <p>+91 9372948631<br>+91 9765174826</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-text">
+                                <h4>Email Addresses</h4>
+                                <p>shreebalajiindustries3@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="contact-text">
+                                <h4>Working Hours</h4>
+                                <p>Monday - Saturday: 9:00 AM - 6:00 PM<br>Sunday: Closed<br>Public Holidays: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company Name</label>
+                                <input type="text" id="company" placeholder="Enter your company name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" placeholder="Enter your phone number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" placeholder="Enter the subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" placeholder="Enter your message or inquiry" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-industry"></i> Shree Balaji Industries
+                </div>
+                <div class="footer-text">
+                    &copy; 2023 Shree Balaji Industries. All rights reserved. | Precision Automobile Parts Manufacturing
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
